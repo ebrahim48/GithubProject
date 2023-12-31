@@ -8,6 +8,7 @@ import 'package:githubtask/views/home_page.dart';
 import 'controllers/repository_controller.dart';
 
 void main() {
+  Get.put(RepositoryController());
   runApp(MyApp());
 }
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Your App Name',
+      title: 'Github',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
