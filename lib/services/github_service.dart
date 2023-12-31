@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-
 import '../models/github_model.dart';
 
 class GithubService {

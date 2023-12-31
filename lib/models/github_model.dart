@@ -1,5 +1,4 @@
 import 'owner_model.dart';
-
 class GithubModel {
   int? totalCount;
   bool? incompleteResults;
