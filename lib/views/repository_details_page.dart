@@ -1,27 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
-import '../models/github_model.dart';
-
 class RepositoryDetailsPage extends StatelessWidget {
-  final Items repository = Get.arguments as Items;
-
+  final int repositoryId;
+  RepositoryDetailsPage({required this.repositoryId});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(repository.name ?? ''),
+        title: Text("Repository Details"),
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Owner: ${repository.owner?.login ?? ''}'),
-          ],
-        ),
+      body: Center(
+        child: Text("Details for Repository ID: $repositoryId"),
       ),
     );
   }
