@@ -1,11 +1,14 @@
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 import '../database/database_helper.dart';
 import '../models/github_model.dart';
 import '../services/github_service.dart';
 
+
 class RepositoryController extends GetxController {
+  final GithubService _githubService = GithubService();
+  final DatabaseHelper _databaseHelper = DatabaseHelper();
+
   var repositories = <Items>[].obs;
 
   @override
@@ -14,14 +17,17 @@ class RepositoryController extends GetxController {
     fetchData();
   }
 
-  Future<void> fetchData() async {
+  void fetchData() async {
     try {
-      var response = await GithubService().getRepositories("Flutter");
-      repositories.assignAll(response.items!);
-      await DatabaseHelper().insertRepositories(response.items!);
-        } catch (error) {
-      print("Error: $error");
-      repositories.assignAll(await DatabaseHelper().getRepositories());
+
+      var githubRepositories = await _githubService.getRepositories('Flutter');
+
+
+      await _databaseHelper.insertRepositories(githubRepositories.items!);
+
+      repositories.assignAll(githubRepositories.items!);
+    } catch (e) {
+      print("Error fetching data: $e");
     }
   }
 }

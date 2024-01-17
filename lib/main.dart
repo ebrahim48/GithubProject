@@ -13,9 +13,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'GitHub Repositories',
+      title: 'GitHub Repositories App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

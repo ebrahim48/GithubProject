@@ -247,7 +247,7 @@ class Items {
     svnUrl = json['svn_url'];
     homepage = json['homepage'];
     size = json['size'];
-    id = json['id']?.toInt();
+    id = _parseNullableInt(json['id']);
     stargazersCount = _parseNullableInt(json['stargazers_count']);
     watchersCount = _parseNullableInt(json['watchers_count']);
     language = json['language'];
@@ -257,11 +257,11 @@ class Items {
     hasWiki = json['has_wiki'];
     hasPages = json['has_pages'];
     hasDiscussions = json['has_discussions'];
-    forksCount = json['forks_count'];
+    forksCount = _parseNullableInt(json['forks_count']);
     mirrorUrl = json['mirror_url'];
     archived = json['archived'];
     disabled = json['disabled'];
-    openIssuesCount = json['open_issues_count'];
+    openIssuesCount = _parseNullableInt(json['open_issues_count']);
     license =
     json['license'] != null ? new License.fromJson(json['license']) : null;
     allowForking = json['allow_forking'];
@@ -371,7 +371,11 @@ int? _parseNullableInt(dynamic value) {
     return null;
   }
 
-  if (value is int || value is double) {
+  if (value is int) {
+    return value;
+  }
+
+  if (value is double) {
     return value.toInt();
   }
 

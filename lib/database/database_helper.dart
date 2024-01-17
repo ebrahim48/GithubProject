@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:path/path.dart' as path;
 import 'package:sqflite/sqflite.dart' as sqflite;
-import 'package:your_app_name/models/github_model.dart';
+import 'package:sqflite/sqflite.dart';
 
 import '../models/github_model.dart';
 
@@ -12,18 +12,18 @@ class DatabaseHelper {
 
   DatabaseHelper._internal();
 
-  late sqflite.Database _database;
+  late sqflite.Database? _database;
 
   Future<sqflite.Database> get database async {
-    if (_database != null) return _database;
+    if (_database != null) return _database!;
 
     _database = await initDatabase();
-    return _database;
+    return _database!;
   }
 
   Future<sqflite.Database> initDatabase() async {
     String databasesPath = await sqflite.getDatabasesPath();
-    String dbPath = path.join(databasesPath, 'your_app_name.db');
+    String dbPath = path.join(databasesPath, 'Github Repositories');
 
     return await sqflite.openDatabase(
       dbPath,
