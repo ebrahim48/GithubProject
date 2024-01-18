@@ -1,15 +1,11 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-
-import '../controllers/repository_controller.dart';
+import 'package:githubtask/controllers/repository_controller.dart';
+import 'package:githubtask/models/github_model.dart';
+import 'package:githubtask/views/repository_details_page.dart';
 
 class HomePage extends StatelessWidget {
-  final RepositoryController repositoryController = Get.put(
-      RepositoryController());
+  final RepositoryController repositoryController = Get.put(RepositoryController());
 
   @override
   Widget build(BuildContext context) {
@@ -18,35 +14,36 @@ class HomePage extends StatelessWidget {
         title: Text('GitHub Repositories'),
       ),
       body: Obx(
-            () =>
-        repositoryController.isLoading.value
+            () => repositoryController.getIsLoading
             ? Center(
           child: CircularProgressIndicator(),
         )
-            : Column(
-          children: [
-            ElevatedButton(
-              onPressed: () async {
-                // await repositoryController.fetchData();
-              },
-              child: Text('Fetch Data'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                // repositoryController.sortRepositories('lastUpdated');
-              },
-              child: Text('Sort by Last Updated'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                // repositoryController.sortRepositories('starCount');
-              },
-              child: Text('Sort by Star Count'),
-            ),
+            : ListView.builder(
+          itemCount: repositoryController.repositories.length,
+          itemBuilder: (context, index) {
+            var repository = repositoryController.repositories[index];
+            return ListTile(
+              title: Text('Name: ${repository.name ?? 'Name'}'),
+              subtitle: Text('Description: ${repository.description ?? 'Description'}'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => RepositoryDetailsPage(
+                      repository: convertItemsToRepository(repository),
+                    ),
+                  ),
+                );
 
-          ],
+              },
+            );
+          },
         ),
       ),
     );
+  }
+
+  convertItemsToRepository(Items repository) {
+
   }
 }

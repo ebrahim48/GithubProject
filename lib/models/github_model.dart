@@ -2,9 +2,7 @@ class GithubModel {
   int? totalCount;
   bool? incompleteResults;
   List<Items>? items;
-
   GithubModel({this.totalCount, this.incompleteResults, this.items});
-
   GithubModel.fromJson(Map<String, dynamic> json) {
     totalCount = json['total_count'];
     incompleteResults = json['incomplete_results'];
@@ -15,7 +13,6 @@ class GithubModel {
       });
     }
   }
-
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['total_count'] = this.totalCount;
@@ -26,7 +23,6 @@ class GithubModel {
     return data;
   }
 }
-
 class Items {
   int? id;
   String? nodeId;
@@ -275,7 +271,6 @@ class Items {
     defaultBranch = json['default_branch'];
     score = json['score'];
   }
-
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
@@ -365,20 +360,16 @@ class Items {
     return data;
   }
 }
-
 int? _parseNullableInt(dynamic value) {
   if (value == null) {
     return null;
   }
-
   if (value is int) {
     return value;
   }
-
   if (value is double) {
     return value.toInt();
   }
-
   if (value is String) {
     try {
       return int.parse(value);
@@ -386,11 +377,9 @@ int? _parseNullableInt(dynamic value) {
       print("Error parsing int from String: $e");
     }
   }
-
   print("Unhandled type for int conversion: ${value.runtimeType}");
   return null;
 }
-
 class Owner {
   String? login;
   int? id;
@@ -451,7 +440,6 @@ class Owner {
     type = json['type'];
     siteAdmin = json['site_admin'];
   }
-
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['login'] = this.login;
@@ -475,16 +463,13 @@ class Owner {
     return data;
   }
 }
-
 class License {
   String? key;
   String? name;
   String? spdxId;
   String? url;
   String? nodeId;
-
   License({this.key, this.name, this.spdxId, this.url, this.nodeId});
-
   License.fromJson(Map<String, dynamic> json) {
     key = json['key'];
     name = json['name'];
@@ -492,7 +477,6 @@ class License {
     url = json['url'];
     nodeId = json['node_id'];
   }
-
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['key'] = this.key;
